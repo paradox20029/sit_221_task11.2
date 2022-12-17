@@ -39,12 +39,6 @@ class Application:
     def func(self):
         self.n.config(text=str(number[self.x]))
         self.pname.config(text=str(patients[self.x]))
-        #engine = pyttsx3.init()
-        #voices = engine.getProperty('voices')
-        #rate = engine.getProperty('rate')
-        #engine.setProperty('rate', rate-50)
-        #engine.say('Patient number ' + str(number[self.x]) + str(patients[self.x]))
-        #engine.runAndWait()
         self.x += 1
 root = Tk()
 b = Application(root)
