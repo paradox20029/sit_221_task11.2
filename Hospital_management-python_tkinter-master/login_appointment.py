@@ -1,19 +1,21 @@
+#armaan 2110994755
 from tkinter import *
 from tkinter import messagebox as ms
 import sqlite3
 from PIL import ImageTk,Image
 
 with sqlite3.connect('database1.db') as db:
-    c = db.cursor()
+    c = db.cursor() #creating a cursor object using the cursor() method
 
 db.commit()
-db.close()
+db.close() # used to close the current cursor object.
 
 class main:
-    def __init__(self,master):
+    def __init__(self,master): #master is the parameter used to represent the parent window.
     
         self.master = master
-       
+        #stringVar object in Tkinter can help manage the value of a widget such as an 
+        #Entry widget or a Label widget. You can assign a StringVar object to the textvariable of a widget.
         self.username = StringVar()
         self.password = StringVar()
         self.n_username = StringVar()
@@ -26,8 +28,8 @@ class main:
             c = db.cursor()
 
         find_user = ('SELECT * FROM user WHERE username = ? and password = ?')
-        c.execute(find_user,[(self.username.get()),(self.password.get())])
-        result = c.fetchall()
+        c.execute(find_user,[(self.username.get()),(self.password.get())]) #accepts a MySQL query as a parameter and executes the given query.
+        result = c.fetchall()#retrieves all the rows in the result set of a query and returns them as list of tuples
         if result:
             top=Toplevel()
             top.title("appointment window")
@@ -39,7 +41,7 @@ class main:
             top.image=ImageTk.PhotoImage(Image.open("hospital4.jpg"))
             top.panel=Label(top.left,image=top.image)
             top.panel.pack()
-
+#label widget used for creating different labels for the user with various options
             top.heading = Label(top.left,text="Arman Hospital",font=('arial 40 bold'),bd=3,fg='black')
             top.heading.place(x=135,y=0)
 
@@ -61,7 +63,7 @@ class main:
             top.time = Label(top.left,text="Time",font=('arial 18 bold'),fg='black')
             top.time.place(x=0,y=520)
 
-            def next():
+            def next(): #next method using the .get() method to take in the user input
                 top.val1=top.name_ent.get()
                 top.val2=top.age_ent.get()
                 top.val3=top.gender_ent.get()
@@ -72,14 +74,14 @@ class main:
                 if(top.val1=='' or top.val2=='' or top.val3=='' or top.val4=='' or top.val5=='' or top.val6==''):
                    ms.showinfo("warning","fill all the required details")
                 else:
-                    sqlite3.connect('database1.db')
+                    sqlite3.connect('database1.db') #coonecting with the data base and running the insert command
                     sql="INSERT INTO 'appointment'(name,age,gender,address,phone,time)VALUES(?,?,?,?,?,?)"
                     c.execute(sql,(top.val1,top.val2,top.val3,top.val4,top.val5,top.val6))
                     db.commit()
                     ms.showinfo( "Success","appointment been recorded")
 
-            top.name_ent=Entry(top.left,width=30,bd=3)
-            top.name_ent.place(x=250,y=100)
+            top.name_ent=Entry(top.left,width=30,bd=3) #using entry widgtes to display the name age gender etc
+            top.name_ent.place(x=250,y=100) #placing the widgets in accordance to the x and y coordinates
 
             top.age_ent=Entry(top.left,width=30,bd=3)
             top.age_ent.place(x=250,y=140)
@@ -87,7 +89,7 @@ class main:
             top.gender_ent=Entry(top.left,width=30,bd=3)
             top.gender_ent.place(x=250,y=180)
 
-            top.address_ent=Text(top.left,width=40,height=15)
+            top.address_ent=Text(top.left,width=40,height=15) #text widget used for the address
             top.address_ent.place(x=250,y=220)
 
             top.location_ent=Entry(top.left,width=30,bd=3)
