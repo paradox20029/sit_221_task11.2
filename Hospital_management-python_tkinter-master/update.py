@@ -57,10 +57,10 @@ class Application:
         self.utime = Label(self.master, text="Appointment time", font=('arial 18 bold'))
         self.utime.place(x=0, y=350)
 
-   
-        self.ent1 = Entry(self.master, width=30,bd=3)
-        self.ent1.place(x=300, y=150)
-        self.ent1.insert(END, str(self.name1))
+   #entry widget for name, age , gender etc
+        self.ent1 = Entry(self.master, width=30,bd=3) #parameters include the parent window and width, breadth of the widget
+        self.ent1.place(x=300, y=150) #placing in accordance to the specified coordinates
+        self.ent1.insert(END, str(self.name1)) #inserting the string 
 
         self.ent2 = Entry(self.master, width=30,bd=3)
         self.ent2.place(x=300, y=190)
